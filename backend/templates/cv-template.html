@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: navy; }
+        h2 { border-bottom: 2px solid navy; }
+        .section { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>{{ name }}</h1>
+    <p><strong>Email:</strong> {{ email }} | <strong>Telefon:</strong> {{ phone }}</p>
+    
+    <h2>Podsumowanie</h2>
+    <p>{{ summary }}</p>
+    
+    <h2>Doświadczenie</h2>
+    <ul>
+        {% for exp in experience %}
+        <li>{{ exp }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Umiejętności</h2>
+    <ul>
+        {% for skill in skills %}
+        <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Projekty</h2>
+    <ul>
+        {% for project in projects %}
+        <li>{{ project }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
