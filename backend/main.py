@@ -1,11 +1,25 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import pdfkit
 import os
 from jinja2 import Template
 
+options = {
+    'no-outline': None,    # Bez obramowania
+    'encoding': 'UTF-8'    # Ustawienie kodowania na UTF-8
+}
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Pozwól na dostęp z tego portu
+    allow_credentials=True,
+    allow_methods=["*"],  # Pozwól na wszystkie metody (GET, POST, itp.)
+    allow_headers=["*"],  # Pozwól na wszystkie nagłówki
+)
 
 class CVData(BaseModel):
     name: str
@@ -16,27 +30,22 @@ class CVData(BaseModel):
     skills: list
     projects: list
 
-# Ścieżka do szablonu HTML
-TEMPLATE_PATH = "templates/cv_template.html"
+TEMPLATE_PATH = "templates/cv-template.html"
 
 @app.post("/generate_cv/")
 def generate_cv(data: CVData):
     try:
-        # Wczytanie szablonu HTML
         with open(TEMPLATE_PATH, "r", encoding="utf-8") as file:
             template = Template(file.read())
 
-        # Wypełnienie szablonu danymi użytkownika
         html_content = template.render(
             name=data.name, email=data.email, phone=data.phone, summary=data.summary,
             experience=data.experience, skills=data.skills, projects=data.projects
         )
 
-        # Ścieżka do wygenerowanego pliku PDF
         file_path = "generated_cv.pdf"
 
-        # Generowanie PDF-a
-        pdfkit.from_string(html_content, file_path)
+        pdfkit.from_string(html_content, file_path, options=options)
 
         return FileResponse(file_path, media_type="application/pdf", filename="generated_cv.pdf")
 
