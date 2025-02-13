@@ -15,7 +15,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Pozwól na dostęp z tego portu
+    allow_origins=["https://cv-pdf-generator.netlify.app"],  # Pozwól na dostęp z tego portu
     allow_credentials=True,
     allow_methods=["*"],  # Pozwól na wszystkie metody (GET, POST, itp.)
     allow_headers=["*"],  # Pozwól na wszystkie nagłówki
