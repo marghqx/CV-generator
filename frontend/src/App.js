@@ -33,18 +33,25 @@ const App = () => {
         },
         body: JSON.stringify(data),
       });
+      
+      const responseBody = await response.text();  // Zapisz odpowiedź w formie tekstu
+      console.log('Odpowiedź z serwera:', responseBody);  // Zaloguj odpowiedź z backendu
+      console.log('Status odpowiedzi:', response.status); // Zaloguj status odpowiedzi
 
       if (response.ok) {
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
         setPdfUrl(url); // Zapisz URL do wygenerowanego PDF-a
       } else {
+        console.log('Błąd odpowiedzi:', response.status); // Zaloguj status błędu
         alert("Błąd podczas generowania CV.");
       }
     } catch (error) {
       console.error("Wystąpił błąd: ", error);
       alert("Wystąpił błąd przy łączeniu z serwerem.");
     }
+
+    
   };
 
   return (
