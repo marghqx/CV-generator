@@ -26,7 +26,7 @@ const App = () => {
 
     try {
       // Wysyłanie danych do backendu
-      const response = await fetch("http://127.0.0.1:8000/generate_cv/", {
+      const response = await fetch("https://cv-generator-ojl9.onrender.com/generate_cv/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
