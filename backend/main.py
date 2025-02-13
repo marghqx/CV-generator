@@ -30,7 +30,7 @@ class CVData(BaseModel):
     skills: list
     projects: list
 
-TEMPLATE_PATH = "backend/templates/cv-template.html"
+TEMPLATE_PATH = "templates/cv-template.html"
 
 @app.post("/generate_cv/")
 def generate_cv(data: CVData):
