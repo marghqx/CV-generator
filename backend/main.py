@@ -7,18 +7,18 @@ import os
 from jinja2 import Template
 
 options = {
-    'no-outline': None,    # Bez obramowania
-    'encoding': 'UTF-8'    # Ustawienie kodowania na UTF-8
+    'no-outline': None,    
+    'encoding': 'UTF-8'   
 }
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://cv-pdf-generator.netlify.app"],  # Pozwól na dostęp z tego portu
+    allow_origins=["https://cv-pdf-generator.netlify.app"], 
     allow_credentials=True,
-    allow_methods=["*"],  # Pozwól na wszystkie metody (GET, POST, itp.)
-    allow_headers=["*"],  # Pozwól na wszystkie nagłówki
+    allow_methods=["*"], 
+    allow_headers=["*"], 
 )
 
 class CVData(BaseModel):

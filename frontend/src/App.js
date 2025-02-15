@@ -25,7 +25,6 @@ const App = () => {
     };
 
     try {
-      // Wysyłanie danych do backendu
       const response = await fetch("https://cv-generator-ojl9.onrender.com/generate_cv/", {
         method: "POST",
         headers: {
@@ -34,16 +33,16 @@ const App = () => {
         body: JSON.stringify(data),
       });
       
-      const responseBody = await response.text();  // Zapisz odpowiedź w formie tekstu
-      console.log('Odpowiedź z serwera:', responseBody);  // Zaloguj odpowiedź z backendu
-      console.log('Status odpowiedzi:', response.status); // Zaloguj status odpowiedzi
+      const responseBody = await response.text(); 
+      console.log('Odpowiedź z serwera:', responseBody); 
+      console.log('Status odpowiedzi:', response.status); 
 
       if (response.ok) {
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
-        setPdfUrl(url); // Zapisz URL do wygenerowanego PDF-a
+        setPdfUrl(url); 
       } else {
-        console.log('Błąd odpowiedzi:', response.status); // Zaloguj status błędu
+        console.log('Błąd odpowiedzi:', response.status);
         alert("Błąd podczas generowania CV.");
       }
     } catch (error) {
